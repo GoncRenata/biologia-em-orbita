@@ -1,0 +1,39 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "src/pages/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Autor", name: "author", widget: "string", default: "Equipe Biologia em Órbita" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Imagem", name: "image", widget: "image" }
+      - { label: "Descrição da Imagem", name: "image_alt", widget: "string" }
+      - { label: "Resumo", name: "excerpt", widget: "text" }
+      - { label: "Corpo do Post", name: "body", widget: "markdown" }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Biologia", "Astrobiologia", "Genética", "Ecologia", "Paleontologia"] }
+      - { label: "Destaque", name: "featured", widget: "boolean", default: false }
+
+  - name: "pages"
+    label: "Páginas"
+    files:
+      - label: "Sobre"
+        name: "sobre"
+        file: "src/pages/sobre.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string", default: "Sobre o Biologia em Órbita" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }
+      - label: "Contato"
+        name: "contato"
+        file: "src/pages/contato.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string", default: "Contato" }
+          - { label: "Conteúdo", name: "body", widget: "markdown" }

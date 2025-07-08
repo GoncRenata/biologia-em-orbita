@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biologia em Órbita | Divulgação Científica</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <h1>Biologia em Órbita</h1>
+        <p>Explorando os mistérios da vida no universo</p>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sobre">Sobre</a></li>
+          <li><a href="/contato">Contato</a></li>
+          <li><a href="/admin/" class="admin-button">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="featured-post">
+      {% for post in collections.posts | reverse | limit(1) %}
+        <article class="post-card featured">
+          <div class="post-image">
+            {% image post.data.image, post.data.image_alt, "100vw" %}
+          </div>
+          <div class="post-content">
+            <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+            <div class="post-meta">
+              <span class="date">{{ post.date | date: "d M Y" }}</span>
+              <span class="author">Por {{ post.data.author }}</span>
+            </div>
+            <p>{{ post.data.excerpt }}</p>
+            <a href="{{ post.url }}" class="read-more">Leia mais</a>
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+
+    <section class="recent-posts">
+      <h2>Últimas Notícias</h2>
+      <div class="post-grid">
+        {% for post in collections.posts | reverse | offset(1) | limit(6) %}
+          <article class="post-card">
+            <div class="post-image">
+              {% image post.data.image, post.data.image_alt, "(min-width: 768px) 50vw, 100vw" %}
+            </div>
+            <div class="post-content">
+              <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+              <div class="post-meta">
+                <span class="date">{{ post.date | date: "d M Y" }}</span>
+              </div>
+              <p>{{ post.data.excerpt | truncate: 150 }}</p>
+              <a href="{{ post.url }}" class="read-more">Leia mais</a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <h3>Biologia em Órbita</h3>
+          <p>Divulgando ciência de forma acessível e fascinante.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="/sobre">Sobre</a></li>
+            <li><a href="/contato">Contato</a></li>
+            <li><a href="/privacidade">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Redes Sociais</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <p>&copy; {{ "now" | date: "%Y" }} Biologia em Órbita. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
